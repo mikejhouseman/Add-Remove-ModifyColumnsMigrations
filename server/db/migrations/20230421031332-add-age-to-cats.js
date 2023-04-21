@@ -3,9 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    await queryInterface.addColumn('Cats', 'age', {
-
-      type: Sequelize.DataTypes.FLOAT });
+    await queryInterface.addColumn('Cats', 'age', Sequelize.FLOAT); // {type: Sequelize.FLOAT}
 
   },
 
