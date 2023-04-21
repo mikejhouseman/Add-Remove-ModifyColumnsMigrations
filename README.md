@@ -5,7 +5,7 @@ existing tables. This practice will involve research.
 
 ## Getting started
 
-Download starter.  
+Download starter.
 
 Execute the __setup-commands.sh__ script from the root directory of this
 practice. View the contents of the script to see the commands that are executed,
@@ -15,6 +15,33 @@ and view the results in the terminal to confirm that setup was successful.
 sh setup-commands.sh
 ```
 
+```
+cd server
+npx dotenv sequelize-cli db:migrate
+npx dotenv sequelize-cli db:seed:all
+
+sqlite3 db/dev.db
+.tables
+select * from cats; //should get three cats
+
+best practice: create another migration instead of adding to migrations
+
+npx sequelize-cli migration:generate --name add-age-to-cats //new migration
+
+run pending migrations:
+npx dotenv sequelize-cli db:migrate
+
+npx sequelize-cli seed:generate --name add-marcy
+
+npx dotenv sequelize-cli db:seed:all
+
+phase two:
+sqlite3> INSERT INTO Colors (name) VALUES ("red") // Error: .... - working
+
+phase three:
+npx sequelize-cli migration:generate --name rename-games-numPlayers-and-remove-estPlayTime
+
+```
 Use `sequelize-cli` to run the existing migrations and seeder files. Use
 `sqlite3` to check that `Colors`, `Cats`, and `Games` tables all exist in your
 database and have seed data present.
